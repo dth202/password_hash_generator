@@ -5,7 +5,7 @@ LABEL maintainer="Dallas Harris"
 
 RUN pip install flask
 
-COPY web /app
+COPY app /app
 WORKDIR /app
 
 ENTRYPOINT ["python"]
