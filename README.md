@@ -48,3 +48,7 @@ The volume is not necessary unless you want to modify the application without co
 
 This is free to use/distribute. However feel free to contribute if you feel like there is more functionality you would like to implement.
 
+## Changelog
+
+2021/04/20 - Added this line to force new build with latest alpine image.
+
