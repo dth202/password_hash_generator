@@ -35,7 +35,7 @@ docker run -d dth202/password_hash_generator
 docker run \
   --name genhash \
   -d \
-  -v genhash_app:/srv \
+  -v genhash_app:/app \
   --restart always \
   dth202/password_hash_generator
 ```
