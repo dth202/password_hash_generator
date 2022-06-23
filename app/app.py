@@ -54,11 +54,16 @@ def adder_page():
         <html>
             <body>
                 <h1>Password Hash Generator</h1>
-                <subtitle><i>Provided by Campus A Hosting</i></subtitle>
-                <p>This utility creates a hash for the password
-                you enter below. This does not automatically update your
-                password so make sure to send the hash to hosting!</p>
-                <p>Note: Password Requirments:
+                <subtitle><i>created by Dallas Harris</i></subtitle>
+                <p>This utility returns a SHA512 hash for the string
+                you enter below. 
+                <p> uses:
+                <ul>
+                  <li>Create a password hash for linux accounts where passwords are managed via puppet, salt, chef, etc</li>
+                  <li>To create a password hash for your Systems administrator to add to a Linux server without providing your plain text password</li>
+                  </ul>
+                </p>
+                <p>Note: Strong Password Requirments
                 <ul>
                     <li>At least 8 characters in length</li>
                     <li>At least 1 number</li>
