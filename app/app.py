@@ -1,5 +1,5 @@
 from flask import Flask, request
-from processing import do_passwdsalt, validate_password
+from processing import do_passwdsalt, do_validate_password
 
 app = Flask(__name__)
 
