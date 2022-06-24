@@ -25,4 +25,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: dth202/password_hash_generator:stable,dth202/password_hash_generator:${{ GITHUB_REF }}
+          tags: dth202/password_hash_generator:stable,dth202/password_hash_generator:${{ github.ref_name }}
