@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route(os.environ['URI_BASE'], methods=["GET", "POST"])
 
 
 def adder_page():
@@ -64,7 +64,7 @@ def adder_page():
                   <li>To create a password hash for your Systems administrator to add to a Linux server without providing your plain text password</li>
                   </ul>
                 </p>
-                <p>Note: Strong Password Requirments
+                <p>Note: A Strong Password Should contain:
                 <ul>
                     <li>At least 8 characters in length</li>
                     <li>At least 1 number</li>
@@ -91,6 +91,6 @@ def adder_page():
 
 
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0',port=5000)
+    app.run(debug=os.environ["DEBUG"],host=os.environ['HOST'],port=os.environ['PORT'])
 
 
