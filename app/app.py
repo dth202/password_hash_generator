@@ -1,8 +1,9 @@
 from flask import Flask, request
 from processing import do_passwdsalt, do_validate_password
 
-app = Flask(__name__)
+import os
 
+app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 
@@ -15,12 +16,12 @@ def adder_page():
     password = ""
     password_confirmation = ""
     showpass = ""
+    
+    # Check password on POST
     if request.method == "POST":
         password = request.form["passwd1"]
         password_confirmation = request.form["passwd2"]
-        if 'showpass' in request.form:
-            showpass = request.form["showpass"]
-
+        
         # Make sure passwords are not empty and they match
         if not password:
             errors += "<li>Password is missing.</li>"
@@ -28,15 +29,15 @@ def adder_page():
             errors += "<li>Password Confirmation is missing.</li>"
         if password != password_confirmation:
             errors += "<li>Passwords do not match.</li>"
-
-        # Verify Password requirments
-        errors += do_validate_password(password)
-
+        # Verify Password requirments (if needed)
+        if os.environ.get("VALIDATE_PASSWORD"):
+            errors += do_validate_password(password)
         # Show Password?
-        if showpass == 'checked':
+        # Display string if showpass is checked
+        if 'showpass' in request.form and request.form["showpass"] == 'checked':
             message += "<p>Password entered: <font style='font-family:monospace'>{password}</font></p>".format(password=password)
 
-        # Gen Hash if no errors, otherwise display errors
+        # Generate Hash if no errors, otherwise display errors
         if errors == "":
             try:
                 result = do_passwdsalt(password)
