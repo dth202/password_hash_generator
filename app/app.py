@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route(os.environ['URI_BASE'], methods=["GET", "POST"])
+@app.route(os.environ.get('URI_BASE', '/'), methods=["GET", "POST"])
 
 
 def adder_page():
@@ -30,7 +30,7 @@ def adder_page():
         if password != password_confirmation:
             errors += "<li>Passwords do not match.</li>"
         # Verify Password requirments (if needed)
-        if os.environ.get("VALIDATE_PASSWORD"):
+        if os.environ.get("VALIDATE_PASSWORD", False):
             errors += do_validate_password(password)
         # Show Password?
         # Display string if showpass is checked
@@ -91,6 +91,6 @@ def adder_page():
 
 
 if __name__ == '__main__':
-    app.run(debug=os.environ["DEBUG"],host=os.environ['HOST'],port=os.environ['PORT'])
+    app.run(debug=os.environ.get("DEBUG", False),host=os.environ.get('HOST', '0.0.0.0'),port=os.environ.get('PORT', 5000)
 
 
