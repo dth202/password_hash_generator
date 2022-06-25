@@ -42,7 +42,7 @@ def adder_page():
             try:
                 result = do_passwdsalt(password)
                 result_box_style = "display:inline-block;font-family:monospace;background:#eeeeee;border: 2px solid #777777;padding: 14px;border-radius: 4px;color:Black;"
-                message += "<p>&#9989;&nbsp;Success!</p>
+                message += "<p>&#9989;&nbsp;Success!</p>"
 
             except:
                 message += "&#10060;&nbsp;An error has occured: "
