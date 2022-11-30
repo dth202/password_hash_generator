@@ -40,6 +40,30 @@ docker run \
   dth202/password_hash_generator
 ```
 
+## Environment Variables
+
+### Password Requirements
+VALIDATE_PASSWORD=true
+MINIMUM_LENGTH=8
+MAXIMUM_LENGTH=NONE
+REQUIRE_NUMBER=True
+REQUIRE_UPPERCASE=True
+REQUIRE_LOWERCASE=True
+REQUIRE_SPECIAL_CHAR=True
+
+### Debug
+DEBUG=False
+
+### APP parameters
+HOST=0.0.0.0
+PORT=5000
+URI_BASE=/
+
+### Display Options
+
+
+
+
 ## Volume
 
 The volume is not necessary unless you want to modify the application without contributing to the project.

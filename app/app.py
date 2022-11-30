@@ -1,5 +1,5 @@
 from flask import Flask, request
-from processing import do_passwdsalt, do_validate_password
+from processing import get_requirements, do_passwdsalt, do_validate_password
 
 import os
 
@@ -16,6 +16,10 @@ def adder_page():
     password = ""
     password_confirmation = ""
     showpass = ""
+    requirements = get_requirements()
+
+    # Populate Requirements List
+
     
     # Check password on POST
     if request.method == "POST":
@@ -54,7 +58,7 @@ def adder_page():
     return '''
         <html>
             <body>
-                <h1>Password Hash Generator</h1>
+                <h1><a href="https://github.com/dth202/password_hash_generator" target="_blank">Password Hash Generator</a></h1>
                 <subtitle><i>created by Dallas Harris</i></subtitle>
                 <p>This utility returns a SHA512 hash for the string
                 you enter below. 
@@ -64,7 +68,9 @@ def adder_page():
                   <li>To create a password hash for your Systems administrator to add to a Linux server without providing your plain text password</li>
                   </ul>
                 </p>
-                <p>Note: A Strong Password Should contain:
+                <button type="button" class="collapsible">What makes a strong Password?</button>
+                <div class="content">
+                <p>A Strong Password Should contain:
                 <ul>
                     <li>At least 8 characters in length</li>
                     <li>At least 1 number</li>
@@ -72,6 +78,11 @@ def adder_page():
                     <li>At least 1 uppercase letter</li>
                     <li>At least 1 lowercase letter</li>
                 </ul></p>
+                </div> 
+                <div>
+                <p>Password Requirements:
+                <ul>{requirements}</ul></p>
+                </div> 
                 <form method="post" action=".">
                     <label for="passwd1">Password:</label><br>
                     <input id="passwd1" type="password" name="passwd1" value="{passwd1}" /><br>
@@ -87,7 +98,7 @@ def adder_page():
 
             </body>
         </html>
-    '''.format(message=message,result=result,result_box_style=result_box_style,errors=errors,passwd1=password,passwd2=password_confirmation,checked=showpass)
+    '''.format(requirements=requirements,message=message,result=result,result_box_style=result_box_style,errors=errors,passwd1=password,passwd2=password_confirmation,checked=showpass)
 
 
 if __name__ == '__main__':
