@@ -21,4 +21,4 @@ COPY app /app
 WORKDIR /app
 
 ENTRYPOINT ["python"]
-CMD ["app.py"]
+CMD ["genhash.py"]

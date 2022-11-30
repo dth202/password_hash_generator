@@ -1,12 +1,17 @@
 from flask import Flask, request
+from waitress import serve
 from processing import get_requirements, do_passwdsalt, do_validate_password
 
 import os
 
+DEBUG = os.environ.get("DEBUG", False)
+URI_BASE = os.environ.get('URI_BASE', '/')
+HOST = os.environ.get('HOST', '0.0.0.0')
+PORT = os.environ.get('PORT', 8080)
+
 app = Flask(__name__)
 
-@app.route(os.environ.get('URI_BASE', '/'), methods=["GET", "POST"])
-
+@app.route(URI_BASE, methods=["GET", "POST"])
 
 def adder_page():
     message = ""
@@ -101,7 +106,7 @@ def adder_page():
     '''.format(requirements=requirements,message=message,result=result,result_box_style=result_box_style,errors=errors,passwd1=password,passwd2=password_confirmation,checked=showpass)
 
 
-if __name__ == '__main__':
-    app.run(debug=os.environ.get("DEBUG", False),host=os.environ.get('HOST', '0.0.0.0'),port=os.environ.get('PORT', 5000))
+#if __name__ == '__main__':
+#    app.run(debug=DEBUG,host=HOST,port=PORT)
 
-
+serve(app, host=HOST, port=PORT)
