@@ -7,7 +7,7 @@ import os
 DEBUG = os.environ.get("DEBUG", False)
 URI_BASE = os.environ.get('URI_BASE', '/')
 HOST = os.environ.get('HOST', '0.0.0.0')
-PORT = os.environ.get('PORT', 8080)
+PORT = os.environ.get('PORT', 5000)
 
 app = Flask(__name__)
 
