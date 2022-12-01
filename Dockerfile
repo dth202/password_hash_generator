@@ -15,7 +15,7 @@ LABEL maintainer="Dallas Harris"
 # ENV REQUIRE_LOWERCASE=False
 # ENV REQUIRE_SPECIAL_CHAR=False
 
-RUN pip install flask
+RUN pip install flask waitress
 
 COPY app /app
 WORKDIR /app
