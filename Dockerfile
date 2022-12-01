@@ -4,16 +4,21 @@ FROM python:alpine
 LABEL maintainer="Dallas Harris"
 
 # Default ENV values
-# ENV PORT=5000
-# ENV URI_BASE=/
-# ENV DEBUG=False
-# ENV HOST=0.0.0.0
-# ENV VALIDATE_PASSWORD=False
-# ENV MINIMUM_LENGTH=0
-# ENV REQUIRE_NUMBER=False
-# ENV REQUIRE_UPPERCASE=False
-# ENV REQUIRE_LOWERCASE=False
-# ENV REQUIRE_SPECIAL_CHAR=False
+ENV TITLE_STR="Password Hash Generator"
+ENV SUBTITLE_STR="created by Dallas Harris"
+ENV PROJECT_REPO="https://github.com/dth202/password_hash_generator"
+ENV BANNER="This utility returns a SHA512 hash for the string you enter below."
+ENV SERVICE_PORT=5000
+ENV URI_BASE=/
+ENV DEBUG=False
+ENV HOST=0.0.0.0
+ENV VALIDATE_PASSWORD=True
+ENV MINIMUM_LENGTH=8
+ENV MAXIMUM_LENGTH=99
+ENV REQUIRE_NUMBER=True
+ENV REQUIRE_UPPERCASE=True
+ENV REQUIRE_LOWERCASE=True
+ENV REQUIRE_SPECIAL_CHAR=True
 
 RUN pip install flask waitress
 

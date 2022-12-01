@@ -21,9 +21,9 @@ def adder_page():
     password = ""
     password_confirmation = ""
     showpass = ""
-    requirements = get_requirements()
 
     # Populate Requirements List
+    requirements = get_requirements()
 
     
     # Check password on POST
@@ -63,31 +63,17 @@ def adder_page():
     return '''
         <html>
             <body>
-                <h1><a href="https://github.com/dth202/password_hash_generator" target="_blank">Password Hash Generator</a></h1>
-                <subtitle><i>created by Dallas Harris</i></subtitle>
-                <p>This utility returns a SHA512 hash for the string
-                you enter below. 
-                <p> uses:
-                <ul>
-                  <li>Create a password hash for linux accounts where passwords are managed via puppet, salt, chef, etc</li>
-                  <li>To create a password hash for your Systems administrator to add to a Linux server without providing your plain text password</li>
-                  </ul>
-                </p>
-                <button type="button" class="collapsible">What makes a strong Password?</button>
-                <div class="content">
-                <p>A Strong Password Should contain:
-                <ul>
-                    <li>At least 8 characters in length</li>
-                    <li>At least 1 number</li>
-                    <li>At least 1 symbol</li>
-                    <li>At least 1 uppercase letter</li>
-                    <li>At least 1 lowercase letter</li>
-                </ul></p>
-                </div> 
-                <div>
+                <h1><a href="{REPO_URL}" target="_blank" >{TITLE}</a></h1>
+                <subtitle>{SUBTITLE}</subtitle>
+                <p>{BANNER}</p> 
+                
+                <!-- Requirements Box -->
+                <div class="requirements">
                 <p>Password Requirements:
                 <ul>{requirements}</ul></p>
                 </div> 
+
+                <!-- Password Form -->
                 <form method="post" action=".">
                     <label for="passwd1">Password:</label><br>
                     <input id="passwd1" type="password" name="passwd1" value="{passwd1}" /><br>
@@ -97,13 +83,27 @@ def adder_page():
                     <label for="showpass"> Show password with results</label><br>
                     <input type="submit" value="Submit" />
                 </form>
+
+                <!-- Feedback, Errors, or Result -->
                 <div style="color:Black;">{message}</div>
                 <div style="{result_box_style}">{result}</div>
                 <div style="color:Black;"><ul>{errors}</ul></div>
-
+                
             </body>
         </html>
-    '''.format(requirements=requirements,message=message,result=result,result_box_style=result_box_style,errors=errors,passwd1=password,passwd2=password_confirmation,checked=showpass)
+    '''.format(
+            TITLE=os.environ['TITLE_STR'],
+            SUBTITLE=os.environ['SUBTITLE_STR'],
+            BANNER=os.environ['BANNER'],
+            REPO_URL=os.environ['PROJECT_REPO'],
+            requirements=requirements,
+            message=message,
+            result=result,
+            result_box_style=result_box_style,
+            errors=errors,
+            passwd1=password,
+            passwd2=password_confirmation,
+            checked=showpass)
 
 
 #if __name__ == '__main__':
