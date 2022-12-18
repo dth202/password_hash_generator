@@ -24,7 +24,7 @@ def get_requirements():
 def do_validate_password(input):
     # Verify Password requirments
     errors = ''
-    if ( os.environ['MINIMUM_LENGTH'] and len(input) < os.environ['MINIMUM_LENGTH'] ) or ( os.environ['MAXIMUM_LENGTH'] and len(input) > os.environ['MAXIMUM_LENGTH'] ):
+    if ( os.environ['MINIMUM_LENGTH'] and len(input) < int(os.environ['MINIMUM_LENGTH']) ) or ( os.environ['MAXIMUM_LENGTH'] and len(input) > int(os.environ['MAXIMUM_LENGTH']) ):
         errors += "<li>Length: Password needs to be between {min_length} and {max_length} characters in length.</li>".format(min_length=os.environ['MINIMUM_LENGTH'])
     if os.environ['REQUIRE_NUMBER'] and not check_contains(input, string.digits):
         errors += "<li>Complexity: Password needs at least one number.</li>"
