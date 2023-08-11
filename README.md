@@ -40,6 +40,17 @@ docker run \
   dth202/password_hash_generator
 ```
 
+## Docker Compose Example
+```
+services:
+  password_hash_generator:
+    image: dth202/password_hash_generator:stable
+    ports:
+      - 5000:5000
+    environment:
+      MAXIMUM_LENGTH=21
+```
+
 ## Environment Variables
 
 ### Password Requirements
