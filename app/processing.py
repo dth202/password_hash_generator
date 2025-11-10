@@ -1,6 +1,8 @@
-import crypt
+import hashlib
 import string
 import os
+import secrets
+import base64
 
 def check_contains(input, letters):
     return any(char in letters for char in input)
@@ -39,8 +41,14 @@ def do_validate_password(input):
 
 
 def do_passwdsalt(password):
-    hash_result = crypt.crypt(password, crypt.mksalt(crypt.METHOD_SHA512))
+    # Generate hash using hashlib with SHA-512
+    # Format: $6$salt$hash (similar to crypt SHA-512 format)
+    salt = base64.b64encode(secrets.token_bytes(16)).decode('utf-8').rstrip('=')
+    hash_result = f"$6${salt}${hashlib.sha512((salt + password).encode()).hexdigest()}"
+    
     while hash_result.endswith('.'):
-        hash_result = crypt.crypt(password, crypt.mksalt(crypt.METHOD_SHA512))
+        salt = base64.b64encode(secrets.token_bytes(16)).decode('utf-8').rstrip('=')
+        hash_result = f"$6${salt}${hashlib.sha512((salt + password).encode()).hexdigest()}"
+    
     return hash_result
 
