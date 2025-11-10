@@ -1,8 +1,9 @@
-import hashlib
+#import hashlib
 import string
 import os
 import secrets
 import base64
+import ctypes
 
 def check_contains(input, letters):
     return any(char in letters for char in input)
@@ -41,14 +42,16 @@ def do_validate_password(input):
 
 
 def do_passwdsalt(password):
-    # Generate hash using hashlib with SHA-512
-    # Format: $6$salt$hash (similar to crypt SHA-512 format)
-    salt = base64.b64encode(secrets.token_bytes(16)).decode('utf-8').rstrip('=')
-    hash_result = f"$6${salt}${hashlib.sha512((salt + password).encode()).hexdigest()}"
+    # Using ctypes to call crypt from libcrypt (available in Alpine Linux)
+    salt = base64.b64encode(secrets.token_bytes(16), altchars=b"./").rstrip(b"=")
+    crypt = ctypes.CDLL("libcrypt.so.2").crypt
+    crypt.restype = ctypes.c_char_p
+    
+    hash_result = crypt(password.encode(), b"$6$"+salt).decode()
     
     while hash_result.endswith('.'):
-        salt = base64.b64encode(secrets.token_bytes(16)).decode('utf-8').rstrip('=')
-        hash_result = f"$6${salt}${hashlib.sha512((salt + password).encode()).hexdigest()}"
+        salt = base64.b64encode(secrets.token_bytes(16), altchars=b"./").rstrip(b"=")
+        hash_result = crypt(password.encode(), b"$6$"+salt).decode()
     
     return hash_result
 
