@@ -39,5 +39,8 @@ def do_validate_password(input):
 
 
 def do_passwdsalt(password):
-    return crypt.crypt(password, crypt.mksalt(crypt.METHOD_SHA512))
+    hash_result = crypt.crypt(password, crypt.mksalt(crypt.METHOD_SHA512))
+    while hash_result.endswith('.'):
+        hash_result = crypt.crypt(password, crypt.mksalt(crypt.METHOD_SHA512))
+    return hash_result
 
