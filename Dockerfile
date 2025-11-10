@@ -20,8 +20,7 @@ ENV REQUIRE_UPPERCASE=True
 ENV REQUIRE_LOWERCASE=True
 ENV REQUIRE_SPECIAL_CHAR=True
 
-RUN apk add --no-cache libcrypt && \
-    pip install flask waitress
+RUN pip install flask waitress
 
 COPY app /app
 WORKDIR /app
