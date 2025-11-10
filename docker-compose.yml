@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  passwordhashgenerator:
-    image: dth202/passwordhashgenerator:stable
+  genhash:
+    image: dth202/password_hash_generator:stable
     ports:
       - 5000:5000
 
